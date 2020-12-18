@@ -1,4 +1,4 @@
-package com.space.controller;
+package com.space.service;
 
 import com.space.model.Ship;
 import org.springframework.http.HttpStatus;

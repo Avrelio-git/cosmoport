@@ -1,6 +1,5 @@
 package com.space.service;
 
-import com.space.controller.ShipParamValidator;
 import com.space.model.Ship;
 import com.space.model.ShipType;
 import com.space.repository.ShipRepository;
@@ -99,51 +98,6 @@ public class ShipService {
         else ShipParamValidator.Error404("Not Exist ID");
     }
 
-    /*
-        Filtering methods for search in DB
-     */
-    public Specification<Ship> filterStringLike(String value,String param) {
-        return (root, query, cb) -> value == null ? null : cb.like(root.get(param), "%" + value + "%");
-    }
-
-    public Specification<Ship> filterBetween(Integer min, Integer max, String param ) {
-        return (root, query, cb) -> {
-            if (min == null && max == null) return null;
-            if (min == null) return cb.lessThanOrEqualTo(root.get(param), max);
-            if (max == null) return cb.greaterThanOrEqualTo(root.get(param), min);
-            return cb.between(root.get(param), min, max);
-        };
-    }
-
-    public Specification<Ship> filterBetween(Double min, Double max, String param ) {
-        return (root, query, cb) -> {
-            if (min == null && max == null) return null;
-            if (min == null) return cb.lessThanOrEqualTo(root.get(param), max);
-            if (max == null) return cb.greaterThanOrEqualTo(root.get(param), min);
-            return cb.between(root.get(param), min, max);
-        };
-    }
-
-    public Specification<Ship> filterBetween(Long min, Long max, String param) {
-        return (root, query, cb) -> {
-            if (min == null && max == null) return null;
-            if (min == null) return cb.lessThanOrEqualTo(root.get(param), new Date(max));
-            if (max == null) return cb.greaterThanOrEqualTo(root.get(param), new Date(min));
-            return cb.between(root.get(param), new Date(min), new Date(max));
-        };
-    }
-
-    public Specification<Ship> filterEqual(ShipType shipType, String param) {
-        return (root, query, cb) -> shipType == null ? null : cb.equal(root.get(param), shipType);
-    }
-
-    public Specification<Ship> filterBool(Boolean isUsed, String param) {
-        return (root, query, cb) -> {
-            if (isUsed == null) return null;
-            if (isUsed) return cb.isTrue(root.get(param));
-            return cb.isFalse(root.get(param));
-        };
-    }
 
 
 }

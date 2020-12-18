@@ -41,14 +41,14 @@ public class ShipController {
         Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by(order.getFieldName()));
 
         return shipService.getAll(Specification
-                        .where(shipService.filterStringLike(name,"name")
-                        .and(shipService.filterStringLike(planet,"planet")))
-                        .and(shipService.filterEqual(shipType,"shipType"))
-                        .and(shipService.filterBetween(after, before,"prodDate"))
-                        .and(shipService.filterBool(isUsed,"isUsed"))
-                        .and(shipService.filterBetween(minSpeed, maxSpeed,"speed"))
-                        .and(shipService.filterBetween(minCrewSize, maxCrewSize,"crewSize"))
-                        .and(shipService.filterBetween(minRating, maxRating,"rating")),
+                        .where(ShipSpecFilter.filterStringLike(name,"name")
+                        .and(ShipSpecFilter.filterStringLike(planet,"planet")))
+                        .and(ShipSpecFilter.filterEqual(shipType,"shipType"))
+                        .and(ShipSpecFilter.filterBetween(after, before,"prodDate"))
+                        .and(ShipSpecFilter.filterBool(isUsed,"isUsed"))
+                        .and(ShipSpecFilter.filterBetween(minSpeed, maxSpeed,"speed"))
+                        .and(ShipSpecFilter.filterBetween(minCrewSize, maxCrewSize,"crewSize"))
+                        .and(ShipSpecFilter.filterBetween(minRating, maxRating,"rating")),
                 pageable).getContent();
     }
 
@@ -69,14 +69,14 @@ public class ShipController {
                               @RequestParam(value = "maxRating", required = false) Double maxRating) {
 
         return shipService.getShipsCount(Specification
-                        .where(shipService.filterStringLike(name,"name")
-                        .and(shipService.filterStringLike(planet,"planet")))
-                        .and(shipService.filterEqual(shipType,"shipType"))
-                        .and(shipService.filterBetween(after, before,"prodDate"))
-                        .and(shipService.filterBool(isUsed,"isUsed"))
-                        .and(shipService.filterBetween(minSpeed, maxSpeed,"speed"))
-                        .and(shipService.filterBetween(minCrewSize, maxCrewSize,"crewSize"))
-                        .and(shipService.filterBetween(minRating, maxRating,"rating")));
+                        .where(ShipSpecFilter.filterStringLike(name,"name")
+                        .and(ShipSpecFilter.filterStringLike(planet,"planet")))
+                        .and(ShipSpecFilter.filterEqual(shipType,"shipType"))
+                        .and(ShipSpecFilter.filterBetween(after, before,"prodDate"))
+                        .and(ShipSpecFilter.filterBool(isUsed,"isUsed"))
+                        .and(ShipSpecFilter.filterBetween(minSpeed, maxSpeed,"speed"))
+                        .and(ShipSpecFilter.filterBetween(minCrewSize, maxCrewSize,"crewSize"))
+                        .and(ShipSpecFilter.filterBetween(minRating, maxRating,"rating")));
     }
 
 
